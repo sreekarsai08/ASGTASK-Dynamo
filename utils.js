@@ -36,7 +36,7 @@ const queryDynamoDB = (body) => {
         console.log(err, err.stack) // an error occurred
         return reject(err)
       } else {
-        if (data.Count === 1) return reject(err)
+        if (data.Count === 1) return reject(formatErrorCode(1003))
         else return resolve(data)
       }
     })
