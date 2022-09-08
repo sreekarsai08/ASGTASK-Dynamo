@@ -1,13 +1,14 @@
 'use strict'
 
-const formatErrorCode = (error) => {
+const formatErrorCode = (error,message=null) => {
   const errorcodes = {
     1000: 'Invalid request',
     1001: 'Insertion failed',
     1002: 'Info check failed',
     1003: 'Customer already exists'
   }
-  if (errorcodes[error]) return { errorcode: error, message: errorcodes[error] }
+  if (errorcodes[error] && message) return { errorcode: error, message: message }
+  else if(errorcodes[error]) return { errorcode: error, message: errorcodes[error] }
   else return { errorcode: error, message: 'Unknown Error!' }
 }
 
@@ -34,9 +35,9 @@ const queryDynamoDB = (body) => {
     dynamodb.query(params, (err, data) => {
       if (err) {
         console.log(err, err.stack) // an error occurred
-        return reject(formatErrorCode(1002))
+        return reject(formatErrorCode(1002,err.message))
       } else {
-        if (data.Count === 1) return reject(formatErrorCode(1003))
+        if (data.Count === 1) return reject(formatErrorCode(1003,err.message))
         else return resolve(data)
       }
     })
@@ -64,7 +65,7 @@ const insertIntoDynamoDB = (body) => {
     dynamodb.putItem(params, (err, data) => {
       if (err) {
         console.log(err, err.stack) // an error occurred
-        return reject(formatErrorCode(1001))
+        return reject(formatErrorCode(1001,err.message))
       } else {
         console.log(data) // successful response
         return resolve(data)

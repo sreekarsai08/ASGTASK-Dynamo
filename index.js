@@ -20,8 +20,6 @@ app.post('/', async (req, res) => {
 
     await utils.insertIntoDynamoDB(req.body)
 
-    await utils.publishSNS(req.body,'Success Test SNS')
-
     res.json({ success: req.body.customerid })
   } catch (error) {
 
