@@ -24,6 +24,6 @@ app.post('/', async (req, res) => {
 })
 
 // App listen
-app.listen(80, () => {
+app.listen(8080, () => {
   console.log('app listening at 8080')
 })
