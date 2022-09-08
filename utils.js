@@ -30,7 +30,7 @@ const queryDynamoDB = (body) => {
       TableName: 'scores-table'
     }
     const AWS = require('aws-sdk')
-    const dynamodb = new AWS.DynamoDB()
+    const dynamodb = new AWS.DynamoDB({region:'ap-south-1'})
     dynamodb.query(params, (err, data) => {
       if (err) {
         console.log(err, err.stack) // an error occurred
@@ -60,7 +60,7 @@ const insertIntoDynamoDB = (body) => {
       TableName: 'scores-table'
     }
     const AWS = require('aws-sdk')
-    const dynamodb = new AWS.DynamoDB()
+    const dynamodb = new AWS.DynamoDB({region:'ap-south-1'})
     dynamodb.putItem(params, (err, data) => {
       if (err) {
         console.log(err, err.stack) // an error occurred
