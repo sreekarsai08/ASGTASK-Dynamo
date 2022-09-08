@@ -5,6 +5,11 @@ const app = express()
 // Middleware to handle JSON
 app.use(express.json())
 
+// Dummy API for Health Check
+app.get('/', async (req, res) => {
+  res.send('Success')
+})
+
 // Post API
 app.post('/', async (req, res) => {
   const utils = require('./utils')
