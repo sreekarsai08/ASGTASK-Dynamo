@@ -72,9 +72,28 @@ const insertIntoDynamoDB = (body) => {
     })
   })
 }
-
+const publishSNS = (body,error) => {
+  return new Promise((resolve, reject) => {
+    const params = {
+      Message: JSON.stringify({body:body,error:error}),
+      TopicArn: 'arn:aws:sns:ap-south-1:649971045389:WEBSERVER-SNS',
+      Subject: 'Main Error Occurred!',
+    }
+    const AWS = require('aws-sdk')
+    const sns = new AWS.SNS({region:'ap-south-1'})
+    sns.publish(params, (err, data) => {
+      if (err) {
+        console.log(err, err.stack) // an error occurred
+        return reject(formatErrorCode(1004))
+      } else {
+        return resolve(data)
+      }
+    })
+  })
+}
 module.exports = {
   inputValidation,
   insertIntoDynamoDB,
-  queryDynamoDB
+  queryDynamoDB,
+  publishSNS
 }
