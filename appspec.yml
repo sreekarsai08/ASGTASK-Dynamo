@@ -6,5 +6,5 @@ files:
     overwrite: true
 hooks:
   AfterInstall:
-    - location: /home/ec2-user/webserver/scripts/start_pm2.sh
+    - location: /home/ec2-user/scripts/start_pm2.sh
 file_exists_behavior: OVERWRITE
