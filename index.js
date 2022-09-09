@@ -7,7 +7,7 @@ app.use(express.json())
 
 // Dummy API for Health Check
 app.get('/', async (req, res) => {
-  res.send('Success')
+  res.send('Success Commit')
 })
 
 // Post API
