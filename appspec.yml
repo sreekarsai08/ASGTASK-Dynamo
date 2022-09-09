@@ -4,4 +4,7 @@ files:
   - source: /
     destination: /home/ec2-user/webserver
     overwrite: true
+hooks:
+  AfterInstall:
+    - location: /home/ec2-user/webserver/scripts/start_pm2.sh
 file_exists_behavior: OVERWRITE
