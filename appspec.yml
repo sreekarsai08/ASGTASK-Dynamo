@@ -5,6 +5,8 @@ files:
     destination: /home/ec2-user/webserver
     overwrite: true
 hooks:
+  BeforeInstall:
+    - location: scripts/delete_files.sh
   AfterInstall:
     - location: scripts/start_pm2.sh
 file_exists_behavior: OVERWRITE
