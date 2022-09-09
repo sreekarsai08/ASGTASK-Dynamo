@@ -1,4 +1,2 @@
 #!bin/bash
-cd /home/ec2-user/webserver/
-whoami
-pm2 restart api-dev
+sudo -E pm2 restart api-dev
