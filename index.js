@@ -7,7 +7,7 @@ app.use(express.json())
 
 // Dummy API for Health Check
 app.get('/', async (req, res) => {
-  res.send('Success from Pipeline')
+  res.send('Success from full Pipeline')
 })
 
 // Post API
