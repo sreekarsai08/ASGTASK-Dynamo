@@ -9,11 +9,12 @@ app.use(express.json())
 app.get('/', async (req, res) => {
   const utils = require('./utils')
   const { v4: uuidv4 } = require('uuid');
+  let body = {
+    customerid: uuidv4(),
+    score: Math.random() * (10000 - 1) + 1
+  }
   try {
-    let body = {
-      customerid: uuidv4(),
-      score: Math.random() * (10000 - 1) + 1
-    }
+  
     await utils.inputValidation(body)
 
     await utils.queryDynamoDB(body)
