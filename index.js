@@ -7,7 +7,28 @@ app.use(express.json())
 
 // Dummy API for Health Check
 app.get('/', async (req, res) => {
-  res.send('Success from full Pipeline')
+  const utils = require('./utils')
+  const { v4: uuidv4 } = require('uuid');
+  try {
+    let body = {
+      customerid: uuidv4(),
+      score: Math.random() * (10000 - 1) + 1
+    }
+    await utils.inputValidation(body)
+
+    await utils.queryDynamoDB(body)
+
+    await utils.insertIntoDynamoDB(body)
+
+    res.json({ success: body.customerid })
+  } catch (error) {
+
+    console.log('Main Post Error ===> ', error)
+
+    await utils.publishSNS(body,error)
+
+    res.status(400).json(error)
+  }
 })
 
 // Post API
